@@ -1,58 +1,58 @@
-# Ejemplo Documentación Dojos
-![Tinkercad](./img/ArduinoTinkercad.jpg)
-
-
 ## Integrantes 
-- Agustín Forestieri - Dojo G
+- Eduardo Cruz
+- Pilar Flores
+- Lian Giaccone
+- Antony Llactarima
+- Agustín Forestieri
 
 
 ## Proyecto: Semáforo con buzzer.
 
 ## Descripción
-El proyecto consta de un semáforo de 2 luces por color (2R,2Y,2G) y un buzzer que funciona como alerta
-para no videntes cuando la luz se encuentra en rojo.
+El proyecto consta de un semáforo de 2 luces por color (2R,2Y,2G) y un buzzer que funciona como alerta para no videntes cuando la luz se encuentra en rojo.
 
-## Función principal - encender_par()
-Esta funcion se encarga de encender y apagar los leds. A su vez, en su interior, llama a la funcion activar_buzzer() si se cumple la condición de igualdad con los leds ingresados por parámetro. 
+## Función principal - encender_led() / apagar_led()
+Estas funciones se encargan de encender y apagar los leds. A su vez, entre implementaciones, llama a la funcion buzzerSonar() para activar el sonido del dispositivo.
 
-Los parámetros anteriormente mencionados son: 
+Los parámetros que reciben las funcioens anteriores son: 
 
-int led1: recibe el número de pin al que se encuentra conectado el led N°1 que se desea encender.
-int led2: recibe el número de pin al que se encuentra conectado el led N°2 que se desea encender.
-int segundos: recibe un entero que será multiplicado por 1000 para trabajar en milisegundos.
+int ledEncender1 & 2: recibe el led previamente definido al inicio del código, aquel que se encuentra conectado el led N°1 y se desea encender.
 
-La función encender_par() recibe por parámetro los números de pin de los dos leds que conforman el par a encender / apagar. Esta última funcionalidad se implementó por medio de delays, por lo que el desempeño final no es el esperado. Según lo expuesto hacia el final de la clase, la solución correcta implicaba el uso de
+int ledApagar1 & 2: recibe el led previamente definido al inicio del código, aquel que se encuentra conectado el led N°1 y se desea encender.
+
+int timeOn: recibe el tiempo a ser aplicado en el delay que posee en su interior.
+
+Según lo expuesto hacia el final de la clase, la solución correcta implicaba el uso de
 millis(), situación que no advertimos en la totalidad del grupo y revertiremos en la siguiente entrega.
 
 ~~~ C
-void encender_par(int led1, int led2, int segundos)
-{
-  int tiempo = segundos*1000;
-  int duracionSonido = 100;
-  
-  	digitalWrite(led1, HIGH);
-  	digitalWrite(led2, HIGH);
-        if (led1 == 5 && led2 == 6){
-      		activar_buzzer(duracionSonido, 500, segundos);
-      }
-    delay(tiempo);
-  	digitalWrite(led1, LOW);
-  	digitalWrite(led2, LOW);
+void encenderLed(int ledEncender1, int ledEncender2){
+  digitalWrite(ledEncender1, 1);
+  digitalWrite(ledEncender2, 1);
 }
 
-void activar_buzzer (int tiempo, int demora, int segundos)
-{
-  for (int i = 0; i <= segundos; i++) {
-    
-    tone(0,300,100);
-    delay(demora);
-    
-  }
+void apagarLed(int ledApagar1, int ledApagar2){
+  digitalWrite(ledApagar1, 0);
+  digitalWrite(ledApagar2, 0);
+}
+
+void buzzerSonar(int timeOn){
+  tone(BUZZER, 200);
+  delay(timeOn);
+  noTone(BUZZER);
 }
 ~~~
 
-## :robot: Link al proyecto
-- [proyecto](https://www.tinkercad.com/things/kw3I8IlFSfv-spd-2023-div-b-dojo-g-agustin-forestieri/editel?sharecode=NYzcZdt4x5vzjoNPYdcT1GEqU9z4MqbU3cKS4j_D7L8)
+## :robot: Link al proyecto (principal Antony Llactarima)
+- [Antony Llactarima](https://www.tinkercad.com/things/kXsdZDNvJgr-copy-of-ejercicio1dojo1spd/editel?sharecode=06vqNL1lPvXCI983qTiV1LnEfXw8uGnG0u7eQL63tvw)
+
+- [Eduardo Cruz](https://www.tinkercad.com/things/8QwKX4AZXLV-dojo-eje-1/editel?sharecode=8iSmEHG2VN_YzUBn3qvBR9WEnuSq8YWAPDKaQzCZ76o)
+
+- [Pilar Flores](https://www.tinkercad.com/things/amaHSScJ1uF)
+
+- [Lian Giaccone](https://www.tinkercad.com/things/bbYj47gKiaq-surprising-lappi/editel?sharecode=zvLRXvkNyn7AwXUnfVVHZhyhxIriZwMPTGoEyKHd7T0)
+
+- [Agustín Forestieri](https://www.tinkercad.com/things/kw3I8IlFSfv-spd-2023-div-b-dojo-g-agustin-forestieri/editel?sharecode=NYzcZdt4x5vzjoNPYdcT1GEqU9z4MqbU3cKS4j_D7L8)
 
 ---
 ### Fuentes
